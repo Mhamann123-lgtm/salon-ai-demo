@@ -1,3 +1,7 @@
+## Deployment compatibility fix
+
+This revision pins React and React DOM to matching 19.1.1 versions, adds npm peer-dependency compatibility for Vercel installs, and lets the server read the existing `NEXT_PUBLIC_SUPABASE_URL` environment variable. The build has **not** been verified against Vercel in this environment; if another error appears, inspect the final lines of the deployment log.
+
 # Salon Booking System — independent concept demo
 
 **This replaces the previous OpenAI chatbot entirely.** No OpenAI API key, AI inference, or per-message AI charges.
@@ -12,7 +16,7 @@ Unzip the download on Windows. Upload **all contents** of the extracted folder t
 
 ## 2. Supabase database
 
-Create a project at https://supabase.com. In **SQL Editor**, run `supabase/schema.sql` once. In **Project Settings > API**, copy the project URL to `SUPABASE_URL` and the **service_role** key to `SUPABASE_SERVICE_ROLE_KEY` in Vercel. These are server-only secrets: never use `NEXT_PUBLIC_` with the service key, never commit it to GitHub. The SQL enables row-level security and creates an exclusion constraint that prevents overlapping confirmed appointments for the same stylist, even during simultaneous requests.
+Create a project at https://supabase.com. In **SQL Editor**, run `supabase/schema.sql` once. In **Project Settings > API**, copy the project URL to `NEXT_PUBLIC_SUPABASE_URL` and the **service_role** key to `SUPABASE_SERVICE_ROLE_KEY` in Vercel. These are server-only secrets: never use `NEXT_PUBLIC_` with the service key, never commit it to GitHub. The SQL enables row-level security and creates an exclusion constraint that prevents overlapping confirmed appointments for the same stylist, even during simultaneous requests.
 
 ## 3. Turnstile anti-bot protection (required for public bookings)
 
